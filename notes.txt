@@ -1,0 +1,8 @@
+Minor typos I noticed:
+On the page "Filter by time conflicts," the last block of code given for the App component is
+missing the line "if (!schedule) return <h1>Loading schedule...</h1>;" which I think was
+causing my page to not show anything for me.
+
+Also on that page of the tutorial, the last block of code given for the Course component
+I believe is missing the line "<div className="card-text">{ course.meets }</div>" to display
+the scheduling info for the class. 
