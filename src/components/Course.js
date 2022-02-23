@@ -10,7 +10,7 @@ const getCourseNumber = course => (
 
 const toggle = (x, lst) => (
     lst.some(y => y.id === x.id) ? lst.filter(y => y.id !== x.id) : [x, ...lst]
-  );
+);
 
 const getCourseMeetingData = course => {
     const meets = prompt('Enter meeting data: MTuWThF hh:mm-hh:mm', course.meets);
@@ -40,8 +40,8 @@ const Course = ({ course, selected, setSelected }) => {
 
     const clickRef = useRef();
     useDoubleClick({
-        onSingleClick: isDisabled ? null : () => setSelected(toggle(course, selected)),
-        onDoubleClick: !user ? null : () => {reschedule(course, getCourseMeetingData(course))},
+        onSingleClick: isDisabled ? () => {} : () => setSelected(toggle(course, selected)),
+        onDoubleClick: !user ? () => {} : () => {reschedule(course, getCourseMeetingData(course))},
         ref: clickRef,
         latency: 250
     });
