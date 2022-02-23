@@ -1,5 +1,6 @@
 I made note of a few minor typos I found that I think (today is the first day I have written JS or used React so take this 
-with a grain of salt) broke my program when I copy-pasted the given code snippets into my code. I also think I found one fairly minor bug during the portion where we added the ability for users to edit scheduling data of courses.
+with a grain of salt) broke my program when I copy-pasted the given code snippets into my code. I also think I found one 
+fairly minor bug during the portion where we added the ability for users to edit scheduling data of courses.
 
 On the page "Filter by time conflicts," the last block of code given for the App component is
 missing the line "if (!schedule) return <h1>Loading schedule...</h1>;" which I think was
@@ -14,7 +15,8 @@ On the page, "Store data," the boolean expression assigned to isDisabled is writ
 "const isDisabled = !isSelected && hasConflict(course, selected);" which I think had the
 effect of making selected classes appear grey rather than light green.
 
-On the page "Add authentication," I believe the last code snippet for the TermSelector component is missing an opening parenthesis immediately after its return keyword.
+On the page "Add authentication," I believe the last code snippet for the TermSelector component is missing an opening 
+parenthesis immediately after its return keyword.
 
 
 
