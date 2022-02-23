@@ -31,7 +31,7 @@ classes, only added, and 2. a selected class that gets edited might not be recog
   When we change the time of a class, we add create a new course with the updated info, but the old version - identical in all 
 ways except for the scheduling info - remains on the selected array. The isSelected var in the new course is initialized to 
 true if that course is on the list of selected courses, but only the old copy of the course will be on there, and since they 
-differ in their scheduling info, I'm not sure if array.includes or === will realize that this new course should be considered 
+differ in their scheduling info, I'm not sure if array.includes or === will realize this new course ought to be considered 
 selected since it's previous counterpart was also selected. Then, hasConflict will end up getting called when isDisabled is 
 initialized, it will compare the new version of the course against the old version still on the selected array. This also 
 explains why the "conflict with self" issue doesn't happen with *all* selected courses: the logic for initializing isDisabled 
