@@ -1,4 +1,5 @@
-Minor typos I noticed:
+I made note of a few minor typos I found that I think broke my program when I copy-pasted the given code snippets into my code. 
+I also think I found one fairly minor bug during the portion where we added the ability for users to edit scheduling data of classes.
 
 On the page "Filter by time conflicts," the last block of code given for the App component is
 missing the line "if (!schedule) return <h1>Loading schedule...</h1>;" which I think was
@@ -13,12 +14,20 @@ On the page, "Store data," the boolean expression assigned to isDisabled is writ
 "const isDisabled = !isSelected && hasConflict(course, selected);" which I think had the
 effect of making selected classes appear grey rather than light green.
 
+On the page "Add authentication," I believe the last code snippet for the TermSelector component is missing an opening parenthesis immediately after its return keyword.
+
 During the portion where we added the ability for users to change the scheduled times for classes,
 I noticed a bug where when the time of a class was changed, if that class was selected at the time
 of the edit, the program would find that it had a time conflict with itself, and would set the class
-to be disabled. So, I tried to fix this by having the onDoubleClick action remove the double-clicked
-course from the list of selected courses (if it was on it) in addition to calling reschedule().
-It is a little annoying that you have to re-select courses after editing them, but it's pretty easy
-to do that whereas before this bug got the course into a locked state where it was impossible to
-un-disable it since it had conflicted with itself and, as it was disabled, you could no longer 
-un-select it to remove the source of the conflict.
+to be disabled. Every soluton I tried just spawned more issues, but my hypothesis right now is that there isn't really a
+mechanism for things to get assuredly removed from the list of selected classes, only added. In other words, when we change
+the time of a class, we add a new course json with the updated scheduling info to the array, but the old version - identical
+in all ways except for the scheduling info - remains. Then, hasConflict will end up comparing the new version against the old
+version, and it might find that their times overlap and mark them as conflicting.
+  The various new issues that arose during my attempts to fix this made me think that phenomenon might have potentially led to 
+other minor issues, but anyway, I think I managed to fix this by comparing classes by comparing only their unique ids rather 
+than using array.includes or just course1 === course2, and I added a check to hasConflict to not compare two course with the 
+same id against each other. I think there also may have been an issue with the new version of a course which was selected at 
+the time of its editing not being recognized as selected due to array.includes not recognizing that the course is present in 
+the selected array since the old version still in the array and the new version differ in their scheduling ifnormation despite 
+being the same in all other ways.
