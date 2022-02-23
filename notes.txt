@@ -1,4 +1,5 @@
 Minor typos I noticed:
+
 On the page "Filter by time conflicts," the last block of code given for the App component is
 missing the line "if (!schedule) return <h1>Loading schedule...</h1>;" which I think was
 causing my page to not show anything for me.
@@ -6,3 +7,18 @@ causing my page to not show anything for me.
 Also on that page of the tutorial, the last block of code given for the Course component
 I believe is missing the line "<div className="card-text">{ course.meets }</div>" to display
 the scheduling info for the class. 
+
+On the page, "Store data," the boolean expression assigned to isDisabled is written as 
+"const isDisabled = hasConflict(course, selected);" rather than the previously given 
+"const isDisabled = !isSelected && hasConflict(course, selected);" which I think had the
+effect of making selected classes appear grey rather than light green.
+
+During the portion where we added the ability for users to change the scheduled times for classes,
+I noticed a bug where when the time of a class was changed, if that class was selected at the time
+of the edit, the program would find that it had a time conflict with itself, and would set the class
+to be disabled. So, I tried to fix this by having the onDoubleClick action remove the double-clicked
+course from the list of selected courses (if it was on it) in addition to calling reschedule().
+It is a little annoying that you have to re-select courses after editing them, but it's pretty easy
+to do that whereas before this bug got the course into a locked state where it was impossible to
+un-disable it since it had conflicted with itself and, as it was disabled, you could no longer 
+un-select it to remove the source of the conflict.
