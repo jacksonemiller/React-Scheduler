@@ -16,6 +16,10 @@ effect of making selected classes appear grey rather than light green.
 
 On the page "Add authentication," I believe the last code snippet for the TermSelector component is missing an opening parenthesis immediately after its return keyword.
 
+
+I also found one small bug which I think I was able to fix. That being said, there's a good chance this problem is specific to
+me because I messed up some other part of the tutorial, and I haven't really convinced myself of the root cause of the bug if 
+it exists, although I think I've found a solution to it for now.
 During the portion where we added the ability for users to change the scheduled times for classes,
 I noticed a bug where when the time of a class was changed, if that class was selected at the time
 of the edit, the program would find that it had a time conflict with itself, and would set the class
