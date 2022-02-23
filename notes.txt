@@ -29,15 +29,15 @@ time conflict with itself, and would set the class to be disabled. Every soluton
 hypothesis right now is that 1. there isn't really a mechanism for things to get immediately removed from the list of selected 
 classes, only added, and 2. a selected class that gets edited might not be recognized as selected afterwards. 
   When we change the time of a class, we add create a new course with the updated info, but the old version - identical in all 
-ways except for the scheduling info - remains on the selected array. The isSelected var in the new course is initialized to true 
-if that course is on the list of selected courses, but only the old copy of the course will be on there, and since they differ 
-in their scheduling info, I'm not sure if array.includes or === will realize that this new course should be considered selected 
-since it's previous counterpart was also selected. Then, hasConflict will end up getting called when isDisabled is initialized, 
-it will compare the new version of the course against the old version still on the selected array. This also explains why the
-"conflict with self" issue doesn't happen with *all* selected courses: the logic for initializing isDisabled first checks
-if the course isSelected, and because I'm guessing && short circuits, will only call hasConflict for courses that aren't 
-selected, so, this bug can only happen when two very similar copies of a course are in play, one in the selected array and one
-not in the selected array.
+ways except for the scheduling info - remains on the selected array. The isSelected var in the new course is initialized to 
+true if that course is on the list of selected courses, but only the old copy of the course will be on there, and since they 
+differ in their scheduling info, I'm not sure if array.includes or === will realize that this new course should be considered 
+selected since it's previous counterpart was also selected. Then, hasConflict will end up getting called when isDisabled is 
+initialized, it will compare the new version of the course against the old version still on the selected array. This also 
+explains why the "conflict with self" issue doesn't happen with *all* selected courses: the logic for initializing isDisabled 
+first checks if the course isSelected, and because I'm guessing && short circuits, will only call hasConflict for courses that 
+aren't selected, so, this bug can only happen when two very similar copies of a course are in play, one in the selected array 
+and one not in the selected array.
   The various new issues that arose during my attempts to fix this made me think that phenomenon might have potentially led to 
 other minor issues, but anyway, I think I managed to fix this by comparing classes by comparing only their unique ids rather 
 than using array.includes or just course1 === course2, and I added a check to hasConflict to not compare two course with the 
